@@ -33,28 +33,32 @@ export default function TodoList() {
         </Card>
       ) : (
         todoList.map((todo) => (
-          <Card className="group relative" key={todo.id}>
-            <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-              <DeleteTodo id={todo.id} />
-            </div>
-            <div className="absolute top-2 right-12 opacity-0 group-hover:opacity-100 transition-opacity">
-              <UpdateTodo todo={todo} />
-            </div>
-            <CardHeader>
-              <CardTitle>
-                <span className={todo.isCompleted ? "line-through" : ""}>
-                  {todo.title}
-                </span>
-              </CardTitle>
-            </CardHeader>
-            {todo.description && (
-              <CardContent>
-                <p>{todo.description}</p>
-              </CardContent>
-            )}
-          </Card>
+          <div key={todo.id} className="group">
+            <Card className="hover:bg-gray-100 transition-colors duration-200 relative">
+              <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <DeleteTodo id={todo.id} />
+              </div>
+              <div className="absolute top-2 right-12 opacity-0 group-hover:opacity-100 transition-opacity">
+                <UpdateTodo todo={todo} />
+              </div>
+              <CardHeader>
+                <CardTitle>
+                  <span className={todo.isCompleted ? "line-through" : ""}>
+                    {todo.title}
+                  </span>
+                </CardTitle>
+              </CardHeader>
+              {todo.description && (
+                <CardContent>
+                  <p>{todo.description}</p>
+                </CardContent>
+              )}
+            </Card>
+          </div>
         ))
       )}
     </div>
   );
 }
+
+

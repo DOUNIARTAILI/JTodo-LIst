@@ -13,18 +13,18 @@ public class TodoConfig {
     CommandLineRunner commandLineRunner(TodoRepository repository) {
         return args -> {
             Todo task1 = new Todo(
-                "title heeere",
-                "secription also heere",
+                "Healthy Recipes",
+                "Easy and nutritious meal ideas for a balanced diet.",
                 false
             );
             Todo task2 = new Todo(
-                "Build Todo App",
-                "Implement a full-stack application using Next.js and Spring Boot",
+                "Summer Vacation",
+                "A collection of ideas for your perfect summer getaway.",
                 false // isCompleted
                 );
             Todo task3 = new Todo(
-                "Learn Spring Boot",
-                "Understand basics of Spring Boot and REST API development",
+                "Home Organization",
+                "Practical tips for decluttering and organizing your living space.",
                 false // isCompleted
             );
 
