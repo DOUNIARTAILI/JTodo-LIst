@@ -16,6 +16,10 @@ import TodoForm from "./todo-form";
 import {Todo} from "@prisma/client"
 import { Pencil1Icon } from "@radix-ui/react-icons";
 
+interface ApiResponse {
+  message: string;
+}
+
 export default function UpdateTodo({todo} : {todo: Todo}) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -30,11 +34,11 @@ export default function UpdateTodo({todo} : {todo: Todo}) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      // const responseData = await response.json();
-      // console.log("responseData", responseData)
-      // if (!response.ok) {
-      //   throw new Error(responseData.message || "failed to update todo");
-      // }
+      const responseData = await response.json() as ApiResponse;
+      console.log("responseData", responseData)
+      if (!response.ok) {
+        throw new Error(responseData.message || "failed to update todo");
+      }
       setDialogOpen(false);
       mutate("http://localhost:8080/api/todos");
       setErrorMessage("");

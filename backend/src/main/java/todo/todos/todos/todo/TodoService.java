@@ -38,7 +38,7 @@ public class TodoService {
         if (todoUpdated.getDescription() != null && todoUpdated.getDescription().length() > 0 && !Objects.equals(todo.getDescription(), todoUpdated.getDescription())) {
             todo.setDescription(todoUpdated.getDescription());
         }
-        if (todoUpdated.isCompleted() != false  && !Objects.equals(todo.isCompleted(), todoUpdated.isCompleted())) {
+        if (!Objects.equals(todo.isCompleted(), todoUpdated.isCompleted())) {
             todo.setCompleted(todoUpdated.isCompleted());
         }
     }

@@ -31,7 +31,6 @@ export default function TodoForm({defaultValues, onSubmit, submitButtonText, isS
     resolver: zodResolver(todoSchema), //for data validation i wanna use zod
     defaultValues,
   });
-  console.log("daaaata after updating defaultValues =>", defaultValues);
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

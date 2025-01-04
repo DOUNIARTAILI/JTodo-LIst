@@ -2,6 +2,9 @@ package todo.todos.todos.todo;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -64,9 +67,9 @@ public class Todo {
     public boolean isCompleted() {
         return isCompleted;
     }
-
+    @JsonProperty("isCompleted")
     public void setCompleted(boolean completed) {
-        this.isCompleted = completed;
+        isCompleted = completed;
     }
 
     public LocalDateTime getCreatedAt() {

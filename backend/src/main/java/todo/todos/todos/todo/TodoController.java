@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(path = "/api/todos", produces = "application/json")
-@CrossOrigin(origins = "http://localhost:3001")
+@RequestMapping(path = "/api/todos")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TodoController {
     private final TodoService todoService;
     public TodoController(TodoService todoService){
@@ -28,26 +28,29 @@ public class TodoController {
         return todoService.getTodos();
     }
     @PostMapping
-    public ResponseEntity<String> addTodo(@RequestBody Todo todo) {
+    public ResponseEntity<ApiResponse> addTodo(@RequestBody Todo todo) {
         todoService.addNewTodo(todo);
-        return ResponseEntity.ok("Todo added successfully!");
+        ApiResponse response = new ApiResponse("Todo added successfully");
+        return ResponseEntity.ok(response);
     }
-    @DeleteMapping(path= "{todoId}")
-    public ResponseEntity<String> deleteTodo(@PathVariable("todoId") String todoId) {
+    @DeleteMapping(path = "{todoId}")
+    public ResponseEntity<ApiResponse> deleteTodo(@PathVariable("todoId") String todoId) {
         todoService.deleteTodo(todoId);
-        return ResponseEntity.ok("Todo deleted successfully!");
+        ApiResponse response = new ApiResponse("Todo deleted successfully");
+        return ResponseEntity.ok(response);
     }
     @PutMapping(path = "{todoId}")
-    public ResponseEntity<String> updateTodo(
-        @PathVariable("todoId") String todoId,
-        @RequestBody Todo todo
-    ) {
-        System.out.println(todo);
+    public ResponseEntity<ApiResponse> updateTodo(
+            @PathVariable("todoId") String todoId,
+            @RequestBody Todo todo) {
+        System.out.println("Received todo: " + todo);
         try {
             todoService.updateTodo(todoId, todo);
-            return ResponseEntity.ok("Todo updated successfully!");
+            ApiResponse response = new ApiResponse("Todo updated successfully");
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update todo: " + e.getMessage());
+            ApiResponse response = new ApiResponse("Failed to update todo: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
 }

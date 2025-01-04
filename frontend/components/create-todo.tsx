@@ -8,7 +8,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-
+interface ApiResponse {
+  message: string;
+}
 import { type TodoSchema, todoSchema } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -36,9 +38,10 @@ export default function CreateTodo() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
         });
-        const responseData = await response.json();
+        const responseData = await response.json() as ApiResponse;
+        console.log("responseData", responseData)
         if (!response.ok) {
-          throw new Error(responseData.message || "failed to create todo");
+          throw new Error(responseData.message || "failed to update todo");
         }
         form.reset();
         setDialogOpen(false);
